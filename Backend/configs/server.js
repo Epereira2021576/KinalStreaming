@@ -4,10 +4,10 @@ import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
-import apiLimiter from '../../src/middlewares/validar-cant-peticiones.js';
-import authRoutes from '../../src/auth/auth.routes.js';
-import channelRoutes from '../../src/channel/channel.routes.js';
-import channelSettingsRoutes from '../../src/settingsChannel/settings.routes.js';
+import apiLimiter from '../src/middlewares/validar-cant-peticiones.js';
+import authRoutes from '../src/auth/auth.routes.js';
+import channelRoutes from '../src/channel/channel.routes.js';
+import channelSettingsRoutes from '../src/settingsChannel/settings.routes.js';
 import { dbConnection } from './mongo.js';
 
 class Server {
