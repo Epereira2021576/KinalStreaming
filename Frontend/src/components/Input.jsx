@@ -1,4 +1,4 @@
-export const Input = ({
+export const Input = ( {
   field,
   label,
   value,
@@ -7,14 +7,14 @@ export const Input = ({
   showErrorMessage,
   validationMessage,
   onBlurHandler,
-  textArea,
-}) => {
-  const handleValueChange = (event) => {
-    onChangeHandler(event.target.value, field);
+  textarea,
+} ) => {
+  const handleValueChange = ( event ) => {
+    onChangeHandler( event.target.value, field );
   };
 
-  const handleInputBlur = (event) => {
-    onBlurHandler(event.target.value, field);
+  const handleInputBlur = ( event ) => {
+    onBlurHandler( event.target.value, field );
   };
   return (
     <>
@@ -22,14 +22,14 @@ export const Input = ({
         <span>{label}</span>
       </div>
       <div>
-        {textArea ? (
+        {textarea ? (
           <textarea
             type={type}
             value={value}
             onChange={handleValueChange}
             onBlur={handleInputBlur}
             rows={5}
-            style={{ width: '400px' }}
+            style={{ maxWidth: '400px' }}
           />
         ) : (
           <input

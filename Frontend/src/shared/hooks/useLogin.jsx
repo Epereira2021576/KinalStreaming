@@ -7,10 +7,10 @@ export const useLogin = () => {
   const [isLoading, setIsLoading] = useState( false );
   const navigate = useNavigate();
 
-  const login = async ( password, email ) => {
+  const login = async ( email, password ) => {
     setIsLoading( true );
 
-    const response = await loginRequest( { password, email } );
+    const response = await loginRequest( { email, password } );
 
     setIsLoading( false );
 

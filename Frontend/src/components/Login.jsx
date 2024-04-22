@@ -56,7 +56,7 @@ export const Login = ( { switchAuthHandler } ) => {
       ...prevState,
       [field]: {
         ...prevState[field],
-        isValid,
+        isValid: isValid,
         showError: !isValid,
       },
     } ) );
@@ -86,7 +86,7 @@ export const Login = ( { switchAuthHandler } ) => {
         />
         <Input
           field='password'
-          label='Contraseña'
+          label='Password'
           value={formState.password.value}
           onChangeHandler={handleInputValueChange}
           type='password'
@@ -103,7 +103,7 @@ export const Login = ( { switchAuthHandler } ) => {
         </button>
       </form>
       <span className='auth-form-switch-label' onClick={switchAuthHandler}>
-        Este es el componente de login
+        ¿No tienes una cuenta? Click aqui para registrarte
       </span>
     </div>
   );
