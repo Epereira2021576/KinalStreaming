@@ -1,30 +1,36 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { login as loginRequest } from '../../services';
-import toast from 'react-hot-toast';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { login as loginRequest } from '../../services'
+import toast from "react-hot-toast";
 
 export const useLogin = () => {
-  const [isLoading, setIsLoading] = useState( false );
-  const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState( false )
 
-  const login = async ( email, password ) => {
-    setIsLoading( true );
+    const navigate = useNavigate()
 
-    const response = await loginRequest( { email, password } );
+    const login = async ( email, password ) => {
+        setIsLoading( true )
 
-    setIsLoading( false );
+        const response = await loginRequest( {
+            email,
+            password
+        } )
+        console.log( response )
+        setIsLoading( false )
 
-    if ( response.error ) {
-      return toast.error(
-        response.e?.response?.data || 'An error occurred, try again later'
-      );
+        if ( response.error ) {
+            console.log( response.error )
+            return toast.error( response.e?.response?.data || 'Ocurrió un error al iniciar sesión, intenta de nuevo' )
+        }
+
+        const { userDetails } = response.data
+
+        localStorage.setItem( 'user', JSON.stringify( userDetails ) )
+
+        navigate( '/' )
     }
-
-    const { userDetails } = response.data;
-
-    localStorage.setItem( 'user', JSON.stringify( userDetails ) );
-
-    navigate( '/' );
-  };
-  return { login, isLoading };
-};
+    return {
+        login,
+        isLoading
+    }
+}

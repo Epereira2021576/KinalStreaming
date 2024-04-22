@@ -1,30 +1,36 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { register as registerRequest } from '../../services';
-import toast from 'react-hot-toast';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { register as registerRequest } from '../../services'
+import toast from "react-hot-toast";
 
 export const useRegister = () => {
-    const [isLoading, setIsLoading] = useState( false );
-    const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(false)
 
-    const register = async ( email, username, password ) => {
-        setIsLoading( true );
+    const navigate = useNavigate()
 
-        const response = await registerRequest( { email, username, password } );
+    const register = async(email, password, username) =>{
+        setIsLoading(true)
 
-        setIsLoading( false );
-
-        if ( response.error ) {
-            return toast.error(
-                response.e?.response?.data || 'An error occurred, try again later'
-            );
+        const response = await registerRequest({
+            email,
+            password,
+            username
+        })
+        setIsLoading(false)
+        
+        if(response.error){
+            console.log(response.error)
+            return toast.error(response.e?.response?.data || 'Ocurrió un error al registrarse, intenta de nuevo')
         }
 
-        const { userDetails } = response.data;
+        const { userDetails } = response.data
 
-        localStorage.setItem( 'user', JSON.stringify( userDetails ) );
+        localStorage.setItem('user', JSON.stringify(userDetails))
 
-        navigate( '/auth' );
-    };
-    return { register, isLoading };
-};
+        navigate('/')
+    }
+    return{
+        register,
+        isLoading
+    }
+}

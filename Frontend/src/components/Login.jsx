@@ -1,110 +1,100 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
-import { Logo } from './Logo.jsx';
-import { Input } from './Input.jsx';
-import { useLogin } from '../shared/hooks';
+import { Logo } from "./Logo";
+import { Input } from "./Input";
 import {
   emailValidationMessage,
+  validatePasswordMessage,
   validateEmail,
-  passwordValidationMessage,
-  validatePassword
-}
-  from '../shared/validators'
+  validatePassword,
+} from "../shared/validators";
+import { useLogin } from "../shared/hooks";
 
-export const Login = ( { switchAuthHandler } ) => {
-  const { login, isLoading } = useLogin();
+export const Login = ({ switchAuthHandler }) => {
+  const {login, isLoading} = useLogin();
 
-  const [formState, setFormState] = useState( {
+  const [formState, setFormState] = useState({
     email: {
-      value: '',
+      value: "",
       isValid: false,
-      showError: false
+      showError: false,
     },
     password: {
-      value: '',
+      value: "",
       isValid: false,
-      showError: false
+      showError: false,
     },
+  });
 
-  } );
-
-  const handleInputValueChange = ( value, field ) => {
-    setFormState( ( prevState ) => ( {
+  const handleInputValueChange = (value, field) => {
+    setFormState((prevState) => ({
       ...prevState,
       [field]: {
         ...prevState[field],
-        value: value,
-        isValid: field === 'email' ? validateEmail( value ) : validatePassword( value ),
+        value,
       },
-    } ) );
-
+    }));
   };
 
-  const handleInputValidationOnBlur = ( value, field ) => {
-    let isValid = false
-    switch ( field ) {
-      case 'email':
-        isValid = validateEmail( value );
+  const handleInputValidationOnBlur = (value, field) => {
+    let isValid = false;
+    switch (field) {
+      case "email":
+        isValid = validateEmail(value);
         break;
-      case 'password':
-        isValid = validatePassword( value );
+      case "password":
+        isValid = validatePassword(value);
         break;
-
       default:
         break;
     }
-    setFormState( ( prevState ) => ( {
-      ...prevState,
-      [field]: {
-        ...prevState[field],
-        isValid: isValid,
-        showError: !isValid,
-      },
-    } ) );
+    setFormState((prevState) =>({
+        ...prevState,
+        [field]:{
+            ...prevState[field],
+            isValid,
+            showError: !isValid
+        }
+    }))
+  };
+
+  const handleLogin = (event) => {
+    event.preventDefault()
+    login(formState.email.value, formState.password.value)
   }
 
-  const handleLogin = () => {
-    event.preventDefault();
-
-    login( formState.email.value, formState.password.value );
-  }
-
-  const isSubmitButtonDisabled = isLoading || !formState.email.isValid || !formState.password.isValid;
-
+  const isSubmitButtonDisabled = isLoading || !formState.password.isValid || !formState.email.isValid
   return (
-    <div className='login-container'>
-      <Logo text={'Login KinalCast'} />
-      <form className="auth-form">
+    <div className="login-container">
+        <Logo text={'Login Kinal Cast'}/>
+        <form className="auth-form">
         <Input
-          field='email'
-          label='Email'
+          field="email"
+          label="Email"
           value={formState.email.value}
           onChangeHandler={handleInputValueChange}
-          type='text'
+          type="text"
+          onBlurHandler={handleInputValidationOnBlur}
           showErrorMessage={formState.email.showError}
           validationMessage={emailValidationMessage}
-          onBlurHandler={handleInputValidationOnBlur}
         />
         <Input
-          field='password'
-          label='Password'
+          field="password"
+          label="Password"
           value={formState.password.value}
           onChangeHandler={handleInputValueChange}
-          type='password'
-          showErrorMessage={formState.password.showError}
-          validationMessage={passwordValidationMessage}
+          type="password"
           onBlurHandler={handleInputValidationOnBlur}
+          showErrorMessage={formState.password.showError}
+          validationMessage={validatePasswordMessage}
         />
-        <button
-          className='auth-form-button'
-          onClick={handleLogin}
-          disabled={isSubmitButtonDisabled}
-        >
-          Log in
-        </button>
-      </form>
-      <span className='auth-form-switch-label' onClick={switchAuthHandler}>
-        ¿No tienes una cuenta? Click aqui para registrarte
-      </span>
+            <button onClick={handleLogin} disabled={isSubmitButtonDisabled}>
+                Log in
+            </button>
+        </form>
+        <span onClick={switchAuthHandler} className="auth-form-switch-label">
+            ¿Aún no tienes una cuenta? ¡Registrate...!
+        </span>
     </div>
   );
 };

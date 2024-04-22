@@ -1,16 +1,17 @@
+/* eslint-disable react/prop-types */
 import { useNavigate } from "react-router-dom";
 import { ChannelCard } from "./ChannelCard";
 
-export const Channels = ( { channels } ) => {
-    const navigate = useNavigate();
+export const Channels = ({channels}) => {
+    const navigate  = useNavigate()
 
-    const navigateToChannelHandler = ( id ) => {
-        navigate( `/channel/${id}` );
+    const handleNavigateToChannel = (id) => {
+        navigate(`/channel/${id}`)
     }
 
-    return (
+    return(
         <div className="channels-container">
-            {channels.map( ( c ) => (
+            {channels.map((c) => (
                 <ChannelCard
                     key={c.id}
                     id={c.id}
@@ -18,9 +19,9 @@ export const Channels = ( { channels } ) => {
                     username={c.username}
                     isOnline={c.isOnline}
                     avatarUrl={c.avatarUrl}
-                    navigateToChannelHandler={navigateToChannelHandler}
+                    navigateToChannelHandler={handleNavigateToChannel}
                 />
-            ) )}
+            ))}
         </div>
     )
 }

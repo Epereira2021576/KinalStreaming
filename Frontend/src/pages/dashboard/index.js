@@ -1,1 +1,2 @@
-export { DashboardPage } from './DashboardPage.jsx';
+export { DashboardPage } from './DashboardPage.jsx'
+

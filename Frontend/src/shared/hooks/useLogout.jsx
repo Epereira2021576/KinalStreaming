@@ -1,4 +1,5 @@
 export const logout = () => {
-    localStorage.removeItem( 'user' );
-    window.location.href = './channels';
+    localStorage.removeItem('user')
+
+    window.location.href = './channels'
 }

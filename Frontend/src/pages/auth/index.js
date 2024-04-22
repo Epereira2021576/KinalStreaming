@@ -1,1 +1,1 @@
-export { AuthPage } from './AuthPage.jsx';
+export { AuthPage } from './AuthPage.jsx'
