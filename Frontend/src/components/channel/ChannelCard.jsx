@@ -5,7 +5,7 @@ const imageUrl = 'https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_9
 const ChannelAvatar = ({url}) => {
     return(
         <div className="channels-avatar-container">
-            <img src={url || imageUrl} width='100%' height='100%' alt="Default avatar" />
+            <img src={url ? url : imageUrl} width='100%' height='100%' alt="Default avatar" />
         </div>
     )
 }
