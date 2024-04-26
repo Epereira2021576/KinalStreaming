@@ -27,7 +27,7 @@ const NavButton = ({ text, onClickHandler }) => {
 
 export const Navbar = () => {
   const { isLogged, logout } = useUserDetails();
-    console.log(isLogged)
+
   const navigate = useNavigate()
 
   const handleNavigateToAuthPage = () => {
