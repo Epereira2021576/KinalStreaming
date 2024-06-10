@@ -1,5 +1,5 @@
 import { useChannelSettings } from "../../shared/hooks";
-import { ChannelSettings } from "../channel/ChannelSettings.jsx";
+import { ChannelSettings } from "../channel/channelSettings.jsx";
 import { LoadingSpinner } from '../LoadingSpinner'
 import { PasswordSettings } from "./PasswordSettings";
 import { StreamKey } from "./StreamKey";
