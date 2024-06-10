@@ -5,8 +5,8 @@ import { getChannelDetails as getChannelDetailsRequest } from "../../services";
 export const useChannelDetails = () => {
     const [channelDetails, setChannelDetails] = useState();
 
-    const getChannelDetails = async ( channelId ) => {
-        const responseData = await getChannelDetailsRequest( channelId );
+    const getChannelDetails = async ( id ) => {
+        const responseData = await getChannelDetailsRequest( id );
         if ( responseData.error ) {
             return toast.error( responseData.e?.response?.data || "No es posible obtener los detalles del canal" );
         }
