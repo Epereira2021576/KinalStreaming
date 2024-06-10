@@ -1,18 +1,22 @@
 import { useChannelSettings } from "../../shared/hooks";
 import { ChannelSettings } from "../channel/ChannelSettings";
-import { LoadingSpinner} from '../LoadingSpinner'
+import { LoadingSpinner } from '../LoadingSpinner'
+import { PasswordSettings } from "./PasswordSettings";
+import { StreamKey } from "./StreamKey";
 
 export const Settings = () => {
-    const { channelSettings, isFetching, saveSettings} = useChannelSettings()
+    const { channelSettings, isFetching, saveSettings } = useChannelSettings()
 
-    if(isFetching){
-        return <LoadingSpinner/>
+    if ( isFetching ) {
+        return <LoadingSpinner />
     }
 
-    return(
+    return (
         <div className="settings-container">
             <span>Settings</span>
-            <ChannelSettings settings={channelSettings} saveSettings={saveSettings}/>
+            <ChannelSettings settings={channelSettings} saveSettings={saveSettings} />
+            <PasswordSettings />
+            <StreamKey streamKey={channelSettings.streamKey} />
         </div>
     )
 }
